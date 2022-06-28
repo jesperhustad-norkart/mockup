@@ -1,0 +1,44 @@
+[
+    {
+        "length": 6,
+        "info": {
+            "id": "ea1f2acd-61cb-42a3-9ba1-1433998d2ee1",
+            "sid": "f7f3a536-770d-40eb-abcc-c1bb8def353e",
+            "name": "burn:Aggregate",
+            "unit": "Minute",
+            "resolution": "P7D"
+        },
+        "points": [
+            {
+                "time": "2022-04-25T00:00:00+02:00",
+                "value": 0,
+                "quality": "Good"
+            },
+            {
+                "time": "2022-05-02T00:00:00+02:00",
+                "value": 595,
+                "quality": "Good"
+            },
+            {
+                "time": "2022-05-09T00:00:00+02:00",
+                "value": 1637,
+                "quality": "Good"
+            },
+            {
+                "time": "2022-05-16T00:00:00+02:00",
+                "value": 864,
+                "quality": "Good"
+            },
+            {
+                "time": "2022-05-23T00:00:00+02:00",
+                "value": 1311,
+                "quality": "Good"
+            },
+            {
+                "time": "2022-05-30T00:00:00+02:00",
+                "value": 0,
+                "quality": "Good"
+            }
+        ]
+    }
+]
