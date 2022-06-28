@@ -22,3 +22,9 @@ def dist_from_center(coords: tuple[int, int]) -> int:
     """Calculate distance from Halden center."""
     halden_center = (59.125832, 11.389420)
     return geopy.distance.geodesic(halden_center, coords).km
+
+
+
+
+# def distrRand(start, end):
+#     return round(random.choice(np.random.normal(loc= end - ((end-start)/2), scale =(end-start)/2, size=1)), 2)

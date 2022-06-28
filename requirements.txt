@@ -1,0 +1,6 @@
+geopy==2.2.0
+matplotlib==3.5.2
+numpy==1.23.0
+scipy==1.8.1
+tqdm==4.64.0
+utm==0.7.0

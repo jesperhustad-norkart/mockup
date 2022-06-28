@@ -1,6 +1,6 @@
 from linear_algebra import *
 from utils import *
-from file_process import get_locations, mock_file
+from files import get_locations, mock_file
 from point import Point
 import datetime 
 from copy import deepcopy
