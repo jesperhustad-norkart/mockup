@@ -1,20 +1,26 @@
 import csv
-
+from location import Location
 
 
 """
 Reading and writing data files.
 """
 
-def get_locations(path):
+def get_locations(path) -> list[Location]:
     locations = []
+    
     with open(path, newline='', encoding='utf-8') as f:
         reader = csv.reader(f, delimiter=";")
-        data = iter(list(reader))
+        data = iter(reader)
+        
         next(data) # skip headers
-
-    for i in data: 
-        locations.append(i[33])
+        
+        for i in data: 
+            locations.append(Location(
+                uuid = i[33], 
+                lat = float(i[17].replace(',','.')),
+                lon = float(i[18].replace(',','.'))
+            ))
 
     return locations
 
