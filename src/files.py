@@ -30,3 +30,15 @@ def mock_file():
     writer = csv.writer(f, delimiter=";")
     writer.writerow(["id","Value","SeriesName.Value","Chimney.KomtekLocationReferenceId","Resolution.Value","Unit.Value","Timestamp"])
     return (writer, f)
+
+
+
+import pandas as pd
+import matplotlib.pyplot as plt
+def main():
+    df = pd.read_csv("locations.csv", delimiter=';', skiprows=0, low_memory=False)
+    # get_locations("locations.csv")
+    plt.scatter(x=df['longitude'], y=df['latitude'])
+    plt.show()
+
+if(__name__ == "__main__"): main()
