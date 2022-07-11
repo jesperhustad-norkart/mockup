@@ -12,19 +12,25 @@ import sys
 
 
 debug = False
-
+TIMESERIES_RESOULTION_DAYS = 7
 
 def generate_points(location : Location):
     global debug
-    
+
     point_count = 170
     if(len(sys.argv) > 1): point_count = int(sys.argv[1])
 
     p = Point.getDefault()
     p.komtekLocationReferenceId = location.uuid
-    dist_muliplier = 0.2 + sig(dist_from_center((location.lat, location.lon))) 
+    dist_multiplier = 0.7 + sig(dist_from_center((location.lat, location.lon))) 
 
+    #         Bad code added because year range doesn't take effect after a coupe years of running simulations
+    person_moves_index = when_person_moves() - ((5 + (random.random()*3)) * (365 / TIMESERIES_RESOULTION_DAYS))
+    
     # print(dist_muliplier, location.lat, location.lon)
+    personality_multiplier = new_personality()
+
+
  
 
     points = []
@@ -32,14 +38,16 @@ def generate_points(location : Location):
     # print("\n\ntmp  day chan v dist")
     for i in range(point_count):
 
-        p.timestamp = now + datetime.timedelta(weeks=i)
+        if(i == person_moves_index): 
+            person_moves_index = i + when_person_moves()
+            personality_multiplier = new_personality()
+
+        p.timestamp = now + timeseries_delta(i)
 
         day = p.timestamp.timetuple().tm_yday
         temp_multiplier = temperature_multiplier(day)
 
-        burn_chance =  temp_multiplier * ( dist_muliplier + 0.5)
-
-        
+        burn_chance =  temp_multiplier * dist_multiplier * personality_multiplier
 
         burn_count = deepcopy(p)
         burn_count.unit = "Count"
@@ -48,7 +56,7 @@ def generate_points(location : Location):
 
 
         if(debug): 
-            print(f"{round(temp_multiplier,2):1.2f} {day:3.0f} {burn_chance:1.2f} {burn_count.value} {dist_muliplier:1.2f}")
+            print(f"{round(temp_multiplier,2):1.2f} {day:3.0f} {burn_chance:1.2f} {burn_count.value} {dist_multiplier:1.2f}")
 
         # if(burn_count.value == 0): continue
 
@@ -80,3 +88,14 @@ def main():
 
 
 if(__name__ == "__main__"): main()
+
+
+# person moves every 5 to 10 years
+# rand * 5   + 5
+
+
+# personality stays identical forever
+# multipler on burn amount
+
+
+

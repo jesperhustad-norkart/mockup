@@ -7,10 +7,11 @@ import matplotlib.pyplot as plt
 import csv
 import geopy.distance
 import random
-
+import datetime 
 from scipy import rand
-
 from location import Location
+
+from index import TIMESERIES_RESOULTION_DAYS
 
 def perlin(x): return 0.3 * (-3.2 * np.sin(-1.3 * x) - 1.2 * np.sin(-1.7 * math.e * x) + 1.9 * np.sin(0.7 * math.pi * x))
 
@@ -21,6 +22,12 @@ def temp(x): return (np.sin( ( (x + 240) * 2 * math.pi) / 365) + 1) * 0.5
 def temperature_multiplier(x): return np.abs((1 - temp(x)) + (perlin(x/6)/20))
 
 def positive(x): return x if x > 0 else 0
+
+def new_personality(): 0.6 + (random.random() * 0.4)
+
+def when_person_moves(): return (( random.random() * 8 ) +1 ) * (365 / TIMESERIES_RESOULTION_DAYS)
+
+def timeseries_delta(x): return datetime.timedelta(days=x*TIMESERIES_RESOULTION_DAYS)
 
 def seed_random(seed): 
     random.seed(seed)
