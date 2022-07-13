@@ -14,6 +14,8 @@ import sys
 debug = False
 TIMESERIES_RESOULTION_DAYS = 7
 
+BASE_BURN_CHANCE = 0.3 #guaranteed lowest random number burn chance will be multiplied by
+
 def generate_points(location : Location):
     global debug
 
@@ -47,12 +49,13 @@ def generate_points(location : Location):
         day = p.timestamp.timetuple().tm_yday
         temp_multiplier = temperature_multiplier(day)
 
-        burn_chance =  temp_multiplier * dist_multiplier * personality_multiplier
+        burn_chance = temp_multiplier * dist_multiplier * personality_multiplier
+        burn_chance = 1 if burn_chance > 1 else burn_chance
 
         burn_count = deepcopy(p)
         burn_count.unit = "Count"
         burn_count.seriesName = "burn:start"
-        burn_count.value = int(burn_chance * 6 * ( random.random()+ 0.2) )
+        burn_count.value = int(burn_chance * ((1+BASE_BURN_CHANCE)/7) * ( random.random()+ BASE_BURN_CHANCE) )
 
 
         if(debug): 
